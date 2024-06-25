@@ -7,13 +7,14 @@
 
 <p role="status">Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<p role="status">Current count: @currentCount_2</p>
 
-@code {
-    private int currentCount = 0;
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
-}
+
+<button class="btn btn-primary" @onclick="() => {IncrementCount(currentCount);}">Click me</button>
+<button class="btn btn-primary" @onclick="() => {IncrementCount(currentCount_2);}">NUMARA</button>
+<Check TValue="bool" Checked="@rememberMe" CheckedChanged="@OnRememberMeChanged">Remember Me</Check>
+
+
+
+
