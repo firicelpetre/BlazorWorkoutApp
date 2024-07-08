@@ -1,0 +1,44 @@
+﻿@page "/workouts"
+@*@page "/workouts/{UserId:int}"*@
+
+@using Blazornetrom.DTOs
+@using Blazorise.DataGrid
+@using Microsoft.AspNetCore.Components
+
+<h3>Workouts Page</h3>
+
+<DataGrid TItem="WorkoutsDTO"
+          Data="@WorkoutData"
+          ShowPager
+          ShowPageSizes
+          Responsive
+          Editable>
+    <DataGridColumns>
+        <DataGridCommandColumn TItem="WorkoutsDTO" Caption="Action" ClearFilterCommandAllowed="false">
+            <NewCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnAddButtonClicked()">Add workouts</Button>
+            </NewCommandTemplate>
+            <EditCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnAddWorkoutButtonClicked(context)">Add Exercies Log</Button>
+                <Button Color="Color.Primary" Clicked="() => OnEditButtonClicked(context)">Edit</Button>
+                <Button Color="Color.Primary" Clicked="() => OnSeeExerciesLogs(context)">See Exercies Logs</Button>
+
+            </EditCommandTemplate>
+            <DeleteCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
+            </DeleteCommandTemplate>
+        </DataGridCommandColumn>
+
+       
+
+
+        <DataGridColumn TItem="WorkoutsDTO" Field="Name" Caption="Name" Editable></DataGridColumn>
+
+        <DataGridColumn TItem="WorkoutsDTO" Field="Date" Caption="Date" Editable></DataGridColumn>
+
+        
+    </DataGridColumns>
+</DataGrid>
+
+<DeleteConfirmationDialog @ref="DeleteConfirmation" OnConfirm="HandleDeleteConfirmed" />
+

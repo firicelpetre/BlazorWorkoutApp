@@ -2,6 +2,10 @@ using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Blazornetrom.Components;
+using Blazornetrom.Context;
+using Blazornetrom.Repositories.Imlplementations;
+using Blazornetrom.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IExercicesRepository, ExercicesRepository>();
+builder.Services.AddScoped<IWorkoutsRepository, WorkoutsRepository>();
+builder.Services.AddScoped<IExerciseLogsRepository, ExerciseLogsRepository>();
+builder.Services.AddDbContext<SmartWorkoutContext>(options=>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
 builder.Services
     .AddBlazorise(options =>
     {

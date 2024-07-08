@@ -1,0 +1,33 @@
+﻿@page "/exercies"
+
+@using Blazornetrom.DTOs
+@using Blazorise.DataGrid
+@using Microsoft.AspNetCore.Components
+
+<h3>ExercicesPage</h3>
+
+<DataGrid TItem="ExerciesDTO"
+          Data="@Exercises"
+          ShowPager
+          ShowPageSizes
+          Responsive
+          Editable>
+    <DataGridColumns>
+        <DataGridCommandColumn TItem="ExerciesDTO" Caption="Action" ClearFilterCommandAllowed="false">
+            <NewCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnAddButtonClicked()">Add exercies</Button>
+            </NewCommandTemplate>
+            <EditCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnEditButtonClicked(context)">Edit</Button>
+            </EditCommandTemplate>
+            <DeleteCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
+            </DeleteCommandTemplate>
+        </DataGridCommandColumn>
+
+        <DataGridColumn TItem="ExerciesDTO" Field="Description" Caption="Description" Editable></DataGridColumn>
+        <DataGridColumn TItem="ExerciesDTO" Field="Type" Caption="Type" Editable></DataGridColumn>
+    </DataGridColumns>
+</DataGrid>
+
+<DeleteConfirmationDialog @ref="DeleteConfirmation" OnConfirm="HandleDeleteConfirmed" />

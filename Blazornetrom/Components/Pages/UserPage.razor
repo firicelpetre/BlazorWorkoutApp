@@ -1,0 +1,46 @@
+﻿@page "/users"﻿
+
+@using Blazornetrom.DTOs
+@using Blazorise.DataGrid
+@using Microsoft.AspNetCore.Components
+
+<h3>UserPage</h3>
+
+<DataGrid TItem="UsersDTO"
+          Data="@UserData"
+          ShowPager
+          ShowPageSizes
+          Responsive
+          Editable>
+   <DataGridColumns>
+        <DataGridCommandColumn TItem="UsersDTO" Caption="Action" ClearFilterCommandAllowed="false">
+            <NewCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnAddButtonClicked()">Add user</Button>
+
+            </NewCommandTemplate>
+            <EditCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnEditButtonClicked(context)">Edit</Button>
+                  <Button Color="Color.Primary" Clicked="() => OnAddWorkoutButtonClicked(context)">Add Workout</Button>
+            <Button Color="Color.Primary" Clicked="() => OnSeeUser(context)">See Workout</Button>
+
+            </EditCommandTemplate>
+
+
+             <DeleteCommandTemplate>
+                <Button Color="Color.Primary" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
+            </DeleteCommandTemplate>
+            
+            
+        </DataGridCommandColumn>
+
+        <DataGridColumn TItem="UsersDTO" Field="FirstName" Caption="First Name" Editable></DataGridColumn>
+
+        <DataGridColumn TItem="UsersDTO" Field="LastName" Caption="Last Name" Editable></DataGridColumn>
+
+        <DataGridColumn TItem="UsersDTO" Field="Birthday" Caption="Date of Birth" Editable> </DataGridColumn>
+
+        <DataGridColumn TItem="UsersDTO" Field="Gender" Caption="Gender" Editable></DataGridColumn>
+    </DataGridColumns>
+</DataGrid>
+
+<DeleteConfirmationDialog @ref="DeleteConfirmation" OnConfirm="HandleDeleteConfirmed" />

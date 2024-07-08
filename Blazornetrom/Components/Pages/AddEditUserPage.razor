@@ -1,0 +1,49 @@
+﻿@page "/users/add"
+@page "/users/edit/{UserId:int?}"
+
+@using Blazornetrom.Entites
+
+<h3>AddOrEdit</h3>
+
+<EditForm Model="UsersDTO" OnValidSubmit="SaveUser">
+    <DataAnnotationsValidator />
+
+    <InputNumber @bind-Value="UsersDTO.Id" hidden></InputNumber>
+
+    <div class="form-group">
+        <label>First Name :</label>
+        <div>
+            <InputText @bind-Value="UsersDTO.FirstName" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => UsersDTO.FirstName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Last Name :</label>
+        <div>
+            <InputText @bind-Value="UsersDTO.LastName" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => UsersDTO.LastName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Birthday :</label>
+        <div>
+            <InputDate @bind-Value="UsersDTO.Birthday" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => UsersDTO.Birthday)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="body">Select your gender: </label>
+        <InputSelect @bind-Value="UsersDTO.Gender">
+            @foreach (var gender in Enum.GetValues(typeof(Gender)))
+            {
+                <option value="@gender">@gender</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => UsersDTO.Gender)" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Save" />
+    </div>
+</EditForm>
