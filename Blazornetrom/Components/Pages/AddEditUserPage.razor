@@ -31,6 +31,19 @@
             <ValidationMessage For="@(() => UsersDTO.Birthday)" />
         </div>
     </div>
+    <div class="form-group">
+        <label>Email :</label>
+        <div>
+            <InputText @bind-Value="UsersDTO.Email" class="form-control col-sm-3" />
+            <ValidationMessage For="@(() => UsersDTO.Email)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>IsTrainer :</label>
+        <InputCheckbox @bind-Value="@UsersDTO.IsTrainer" style="transform: scale(2); margin-left: 15px" />
+        <ValidationMessage For="@(() => @UsersDTO.IsTrainer)" />
+    </div>
+
 
     <div class="form-group">
         <label for="body">Select your gender: </label>

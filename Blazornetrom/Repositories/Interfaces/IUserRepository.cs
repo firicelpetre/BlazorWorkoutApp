@@ -16,6 +16,8 @@ namespace Blazornetrom.Repositories.Interfaces
 
         void DeleteUser(int id);
 
+        Users GetUserByEmail(string email);
+
 
 
 

@@ -1,9 +1,13 @@
 ﻿@page "/exerciceslogs"
-@page "/exerciceslogs"
+@page "/exerciceslogs/{WorkoutId:int}"
 
+@attribute [Authorize(Roles = "Administrator")]
 @using Blazornetrom.DTOs
 @using Blazorise.DataGrid
 @using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Authorization
+
+
 
 <h3>ExercicesLogsPage</h3>
 
@@ -14,10 +18,15 @@
           Responsive
           Editable>
     <DataGridColumns>
+       
         <DataGridCommandColumn TItem="ExercicesLogsDTO" Caption="Action" ClearFilterCommandAllowed="false">
+            @*
             <NewCommandTemplate>
-                <Button Color="Color.Primary" Clicked="() => OnAddButtonClicked()">Add exercies</Button>
+               
+                        <Button Color="Color.Primary" Clicked="() => OnAddButtonClicked()">Add exercies</Button>
+                 
             </NewCommandTemplate>
+            *@
             <EditCommandTemplate>
                 <Button Color="Color.Primary" Clicked="() => OnEditButtonClicked(context)">Edit</Button>
             </EditCommandTemplate>
@@ -25,6 +34,7 @@
                 <Button Color="Color.Primary" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
             </DeleteCommandTemplate>
         </DataGridCommandColumn>
+            
 
         <DataGridColumn TItem="ExercicesLogsDTO" Field="Reps" Caption="Reps" Editable></DataGridColumn>
         <DataGridColumn TItem="ExercicesLogsDTO" Field="Duration" Caption="Duration" Editable></DataGridColumn>

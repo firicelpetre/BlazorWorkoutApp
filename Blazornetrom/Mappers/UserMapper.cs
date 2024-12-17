@@ -13,7 +13,9 @@ namespace Blazornetrom.Mappers
                 LastName = userDto.LastName,
                 BirthDay = userDto.Birthday,
                 Gender = userDto.Gender,
-                Id = userDto.Id
+                Id = userDto.Id,
+                Email = userDto.Email,
+                IsTrainer = userDto.IsTrainer
             };
         }
 
@@ -25,7 +27,9 @@ namespace Blazornetrom.Mappers
                 LastName = user.LastName,
                 Birthday = user.BirthDay,
                 Gender = user.Gender,
-                Id = user.Id
+                Id = user.Id,
+                Email = user.Email,
+                IsTrainer = user.IsTrainer
             };
         }
     }

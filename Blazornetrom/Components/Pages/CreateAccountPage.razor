@@ -1,0 +1,47 @@
+﻿@page "/create-account"
+@using Blazornetrom.DTOs
+@using Blazornetrom.Repositories.Interfaces
+@inject IAuthorizationService AuthorizationService
+@inject NavigationManager NavigationManager
+
+<h3>Creare cont</h3>
+
+<EditForm Model="newUserDTO" OnValidSubmit="CreateAccount">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="firstName">Nume</label>
+        <InputText id="firstName" @bind-Value="newUserDTO.FirstName" class="form-control" />
+        <ValidationMessage For="@(() => newUserDTO.FirstName)" />
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Prenume</label>
+        <InputText id="lastName" @bind-Value="newUserDTO.LastName" class="form-control" />
+        <ValidationMessage For="@(() => newUserDTO.LastName)" />
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="newUserDTO.Email" class="form-control" />
+        <ValidationMessage For="@(() => newUserDTO.Email)" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Parola</label>
+        <InputText id="password" @bind-Value="newUserDTO.Password" type="password" class="form-control" />
+        <ValidationMessage For="@(() => newUserDTO.Password)" />
+    </div>
+
+    <div class="form-group">
+        <label for="confirmPassword">Confirmare Parola</label>
+        <InputText id="confirmPassword" @bind-Value="confirmPassword" type="password" class="form-control" />
+        <ValidationMessage For="@(() => confirmPassword)" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Crează cont</button>
+    </div>
+
+</EditForm>

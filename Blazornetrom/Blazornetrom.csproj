@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Pages\CreateAccountPage.cs" />
+    <Compile Remove="Components\Pages\CreateAccountPage.razor.cs" />
+    <Compile Remove="Repositories\Imlplementations\IEmailService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Components\Pages\CreateAccountPage.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Blazorise" Version="1.5.3" />
     <PackageReference Include="Blazorise.Bootstrap" Version="1.5.3" />
     <PackageReference Include="Blazorise.Components" Version="1.5.3" />

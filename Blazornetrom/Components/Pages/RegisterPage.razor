@@ -1,0 +1,114 @@
+﻿@page "/register"
+@using Blazornetrom.DTOs
+@using Blazornetrom.Components.Layout
+
+
+@layout NoNav
+
+<PageTitle>Crează un cont</PageTitle>
+
+<style>
+    .comfy {
+        max-width: 600px;
+        margin: auto;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    h1 {
+        color: green;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+</style>
+
+<main class="comfy">
+    <EditForm Model="userDto" OnValidSubmit="RegisterUser">
+        <div class="form-group">
+            <label for="firstName">Prenume:</label>
+            <InputText id="firstName" @bind-Value="userDto.FirstName" class="form-control" />
+            <ValidationMessage For="@(() => userDto.FirstName)" />
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Nume:</label>
+            <InputText id="lastName" @bind-Value="userDto.LastName" class="form-control" />
+            <ValidationMessage For="@(() => userDto.LastName)" />
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Selectează genul:</label>
+            <InputSelect id="gender" @bind-Value="userDto.Gender" class="form-control">
+                <option value="">Selectează un gen</option>
+                <option value="M">Masculin</option>
+                <option value="F">Feminin</option>
+            </InputSelect>
+            <ValidationMessage For="@(() => userDto.Gender)" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <InputText id="email" @bind-Value="userDto.Email" class="form-control" />
+            <ValidationMessage For="@(() => userDto.Email)" />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Parolă:</label>
+            <InputText id="password" type="password" @bind-Value="userDto.Password" class="form-control" />
+            <ValidationMessage For="@(() => userDto.Password)" />
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirmă Parola:</label>
+            <InputText id="confirmPassword" type="password" @bind-Value="ConfirmPassword" class="form-control" />
+            <ValidationMessage For="@(() => ConfirmPassword)" />
+        </div>
+
+        @if (!string.IsNullOrEmpty(PasswordErrorMessage))
+        {
+            <div class="text-danger">@PasswordErrorMessage</div>
+        }
+
+        
+        <div class="form-group">
+            <label>Esti antrenor?</label>
+            <InputCheckbox @bind-Value="userDto.IsTrainer" style="transform: scale(1.5); margin-left: 15px" />
+            <ValidationMessage For="@(() => userDto.IsTrainer)" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Crează cont</button>
+        </div>
+    </EditForm>
+
+    @if (RegistrationFailed)
+    {
+        <h1 class="text-danger">Înregistrare eșuată: @ErrorMessage</h1>
+    }
+</main>
+
+
+
+
+
+

@@ -14,5 +14,7 @@ namespace Blazornetrom.Repositories.Interfaces
         void UpdateExercicesLogs(ExercicesLogsDTO exercicesLogsDTO);
 
         void DeleteExercicesLogs(int id);
-    }
+
+		public IList<ExercicesLogsDTO> GetExercicesLogsByWorkoutsId(int id);
+	}
 }

@@ -7,12 +7,19 @@ using Microsoft.AspNetCore.Components;
 namespace Blazornetrom.Components.Pages
 {
     public partial class ExerciseLogsPage : ComponentBase
-    {
 
-        [Inject]
+
+    {
+		[Parameter]
+		public int? WorkoutId { get; set; }
+
+		[Inject]
         public IExerciseLogsRepository exerciseLogsRepository { get; set; } = default;
 
-        [Inject]
+		[Inject]
+		public IWorkoutsRepository workoutsRepository { get; set; } = default;
+
+		[Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
 
         private DeleteConfirmationDialog DeleteConfirmation;
@@ -21,11 +28,21 @@ namespace Blazornetrom.Components.Pages
 
         private ExercicesLogsDTO SelectedExercicesLogs;
 
-        protected override void OnInitialized()
-        {
-            ExerciesLogsData = exerciseLogsRepository.GetAll().ToList();
-        }
-        private void OnAddButtonClicked()
+       
+
+		protected override void OnInitialized()
+		{
+			if (WorkoutId == null)
+			{
+				ExerciesLogsData = exerciseLogsRepository.GetAll().ToList();
+			}
+			else
+			{
+
+				ExerciesLogsData = exerciseLogsRepository.GetExercicesLogsByWorkoutsId(WorkoutId.Value).ToList();
+			}
+		}
+		private void OnAddButtonClicked()
         {
             NavigationManager.NavigateTo($"/exerciceslogs/add");
         }

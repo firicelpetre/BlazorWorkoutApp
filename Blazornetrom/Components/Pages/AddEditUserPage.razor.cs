@@ -49,14 +49,21 @@ namespace Blazornetrom.Components.Pages
         {
             if (IsEdit)
             {
+                // Actualizare utilizator existent
                 UserRepository.UpdateUser(UsersDTO);
             }
             else
             {
+                // Criptarea parolei înainte de salvare
+                var encryptedPassword = BCrypt.Net.BCrypt.HashPassword(UsersDTO.Password);
+                UsersDTO.Password = encryptedPassword;
+
+                // Adăugarea unui utilizator nou
                 UserRepository.AddUser(UsersDTO);
             }
 
             NavigationManager.NavigateTo("/users");
         }
+
     }
 }

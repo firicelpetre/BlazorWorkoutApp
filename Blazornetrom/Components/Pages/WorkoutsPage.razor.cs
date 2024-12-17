@@ -12,6 +12,10 @@ namespace Blazornetrom.Components.Pages
         public int? WorkoutId { get; set; }
 
 
+         [Parameter]
+        public int? UsersID { get; set; }
+
+
         [Inject]
         public IWorkoutsRepository WorkoutsRepo { get; set; } = default;
 
@@ -26,7 +30,15 @@ namespace Blazornetrom.Components.Pages
 
         protected override void OnInitialized()
         {
-            WorkoutData = WorkoutsRepo.GetAll().ToList();
+            if (UsersID == null)
+            {
+                WorkoutData = WorkoutsRepo.GetAll().ToList();
+            }
+            else
+            {
+
+                WorkoutData = WorkoutsRepo.GetWorkoutsByUserId(UsersID.Value).ToList();
+            }
         }
 
         private void OnAddButtonClicked()
@@ -52,7 +64,7 @@ namespace Blazornetrom.Components.Pages
         }
         private void OnSeeExerciesLogs(EditCommandContext<WorkoutsDTO> context)
         {
-            NavigationManager.NavigateTo($"/exercieslogs/{context.Item.Id}");
+            NavigationManager.NavigateTo($"/exerciceslogs/{context.Item.Id}");
         }
         private async Task HandleDeleteConfirmed(bool confirmed)
         {

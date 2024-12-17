@@ -1,10 +1,14 @@
-﻿@page "/users"﻿
+﻿
+
+@page "/users"﻿
+
+@attribute [Authorize(Roles = "Administrator")]
 
 @using Blazornetrom.DTOs
 @using Blazorise.DataGrid
-@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Authorization
 
-<h3>UserPage</h3>
+<h3>Clineti</h3>
 
 <DataGrid TItem="UsersDTO"
           Data="@UserData"
@@ -44,3 +48,68 @@
 </DataGrid>
 
 <DeleteConfirmationDialog @ref="DeleteConfirmation" OnConfirm="HandleDeleteConfirmed" />
+
+<style>
+
+h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.DataGrid {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.DataGrid .b-datagrid {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.DataGrid .b-datagrid-header, .DataGrid .b-datagrid-footer {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+.DataGrid .b-datagrid-row:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.DataGrid .b-datagrid-cell {
+    padding: 10px;
+}
+
+.DataGrid .b-datagrid-command-cell button {
+    margin: 0 5px;
+}
+
+button {
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+button.Color.Primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+button.Color.Primary:hover {
+    background-color: #0056b3;
+}
+
+.DeleteConfirmationDialog {
+    text-align: center;
+    padding: 20px;
+}
+
+.DeleteConfirmationDialog button {
+    margin: 0 10px;
+}
+
+    </style>

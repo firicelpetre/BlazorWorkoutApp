@@ -13,6 +13,7 @@ namespace Blazornetrom.Repositories.Interfaces
         void UpdateWorkouts(WorkoutsDTO workouts);
 
         void DeleteWorkouts(int id);
+        public IList<WorkoutsDTO> GetWorkoutsByUserId(int id);
 
 
     }

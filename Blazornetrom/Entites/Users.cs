@@ -8,5 +8,11 @@
         public DateTime BirthDay { get; set; }
         public string Gender { get; set; }
         public ICollection<Workouts> Workouts { get; set; }
+
+        public string Email { get; set; }
+
+        public Boolean IsTrainer {  get; set; }
+
+        public string Password { get; set; }
     }
 }

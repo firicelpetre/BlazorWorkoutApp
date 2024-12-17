@@ -1,9 +1,10 @@
 ﻿@page "/workouts"
-@*@page "/workouts/{UserId:int}"*@
+@page "/workouts/{UsersID:int}"
 
 @using Blazornetrom.DTOs
 @using Blazorise.DataGrid
 @using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Authorization
 
 <h3>Workouts Page</h3>
 
@@ -15,9 +16,7 @@
           Editable>
     <DataGridColumns>
         <DataGridCommandColumn TItem="WorkoutsDTO" Caption="Action" ClearFilterCommandAllowed="false">
-            <NewCommandTemplate>
-                <Button Color="Color.Primary" Clicked="() => OnAddButtonClicked()">Add workouts</Button>
-            </NewCommandTemplate>
+            
             <EditCommandTemplate>
                 <Button Color="Color.Primary" Clicked="() => OnAddWorkoutButtonClicked(context)">Add Exercies Log</Button>
                 <Button Color="Color.Primary" Clicked="() => OnEditButtonClicked(context)">Edit</Button>

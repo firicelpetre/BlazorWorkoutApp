@@ -3,6 +3,7 @@ using Blazornetrom.DTOs;
 using Blazornetrom.Entites;
 using Blazornetrom.Mappers;
 using Blazornetrom.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blazornetrom.Repositories.Imlplementations
 {
@@ -60,5 +61,23 @@ namespace Blazornetrom.Repositories.Imlplementations
                 _context.SaveChanges();
             }
         }
-    }
+
+		public IList<ExercicesLogsDTO> GetExercicesLogsByWorkoutsId(int id)
+		{
+
+			var exerciceslogs = new List<ExercicesLogsDTO>();
+			var allExercicesLogs = _context.ExercicesLogs.Where(w => w.WorkoutId == id).Include(x => x.Workouts).ToList();
+			if (allExercicesLogs?.Any() == true)
+			{
+				foreach (var exerciceLog in allExercicesLogs)
+				{
+					var exerciceslogsdto = ExercicesLogsMappers.ToExercicesLogsDto(exerciceLog);
+					exerciceslogs.Add(exerciceslogsdto);
+				}
+			}
+
+			return exerciceslogs;
+
+		}
+	}
 }

@@ -62,6 +62,25 @@ namespace Blazornetrom.Repositories.Imlplementations
                 _context.SaveChanges();
             }
         }
+        
+
+        public IList<WorkoutsDTO> GetWorkoutsByUserId(int id)
+        {
+
+            var workouts = new List<WorkoutsDTO>();
+            var allWorkouts = _context.Workouts.Where(w => w.UserId == id).Include(x => x.Users).ToList();
+            if (allWorkouts?.Any() == true)
+            {
+                foreach (var workout in allWorkouts)
+                {
+                    var workoutDto = WorkoutsMapper.ToWorkoutDto(workout);
+                    workouts.Add(workoutDto);
+                }
+            }
+
+            return workouts;
+
+        }
 
     }
 }
